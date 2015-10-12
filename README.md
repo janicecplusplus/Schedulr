@@ -7,6 +7,6 @@ A **schedule sharing web application** that allows users to view combined schedu
 
 ## Team members:
 **J**anice See | **T**anay Agarwal | **E**nyu Hsu | **N**isarg Modi
----|---|---|---
+:---:|:---:|:---:|:---:
 ![Janice](images/janice.png?raw=true "Janice") | ![Tanay](images/tanay.png?raw=true "Tanay") | ![Enyu](images/enyu.png?raw=true "Enyu") | ![Nisarg](images/nisarg.png?raw=true "Nisarg")
 [@janicecplusplus](https://github.com/janicecplusplus) | [@Tanay992](https://github.com/Tanay992) | [@enyuhsu](https://github.com/enyuhsu) | [@nisargmodi](https://github.com/nisargmodi)
