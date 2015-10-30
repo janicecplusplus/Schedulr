@@ -13,11 +13,36 @@ body {
   .main_bg {
     padding: 50px 0;
     text-align: center;
-    background: url('landing_header.jpg');
+    background: url(<%= 'landing_header.jpg' %>);
     background-size: 100%;
     background-repeat: no-repeat;
     color: #f8f8f8;
   }
+
+/* BUTTONS
+-------------------------------------------------- */
+
+.btn.outline {
+    background: none;
+    padding: 12px 22px;
+}
+
+.btn-primary.outline {
+    border: 3px solid #FFFFFF;
+    color: #FFFFFF;
+}
+
+.btn-primary.outline:hover, .btn-primary.outline:focus, .open > .dropdown-toggle.btn-primary {
+    background-color: #B6C3E7;
+    color: #FFFFFF;
+    border-color: #B6C3E7;
+}
+.btn-primary.outline:active, .btn-primary.outline.active {
+    background-color: #9094DA;
+    color: #FFFFFF;
+    border-color: #9094DA;
+    box-shadow: none;
+}
 
 /* MARKETING CONTENT
 -------------------------------------------------- */
@@ -43,15 +68,15 @@ body {
 }
 
 #img-circle-1 {
-  background: url('marketing1.jpg'); 
+  background: url(<%= 'marketing1.jpg' %>); 
 }
 
 #img-circle-2 {
-  background: url('marketing2.jpg'); 
+  background: url(<%= 'marketing2.jpg' %>); 
 }
 
 #img-circle-3 {
-  background: url('marketing3.jpg'); 
+  background: url(<%= 'marketing3.jpg' %>); 
 }
 
 /* RESPONSIVE CSS
