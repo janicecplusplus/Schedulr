@@ -25,13 +25,6 @@ body {
   padding-right: 0;
   padding-left: 0;
 }
-.navbar-wrapper .navbar {
-  padding-right: 15px;
-  padding-left: 15px;
-}
-.navbar-wrapper .navbar .container {
-  width: auto;
-}
 
 /* HEADER
 -------------------------------------------------- */
@@ -49,7 +42,7 @@ body {
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
-/* Center align the text within the three columns below the carousel */
+/* Center align the text within the three columns below the header */
 .marketing .col-lg-4 {
   margin-bottom: 20px;
   text-align: center;
@@ -67,6 +60,18 @@ body {
   height: 160px;
 }
 
+#img-circle-1 {
+  background: url('marketing1.jpg'); 
+}
+
+#img-circle-2 {
+  background: url('marketing2.jpg'); 
+}
+
+#img-circle-3 {
+  background: url('marketing3.jpg'); 
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -75,18 +80,9 @@ body {
   .navbar-wrapper {
     margin-top: 0px;
   }
-  .navbar-wrapper .container {
-    padding-right: 15px;
-    padding-left: 15px;
-  }
   .navbar-wrapper .navbar {
     padding-right: 0;
     padding-left: 0;
-  }
-
-  /* The navbar becomes detached from the top, so we round the corners */
-  .navbar-wrapper .navbar {
-    border-radius: 0;
   }
 
   .featurette-heading {
@@ -169,52 +165,8 @@ html {
     border-top: 3px solid #e7e7e7;
 }
 
-.banner {
-    padding: 100px 0;
-    color: #f8f8f8;
-    background: url(../images/banner-bg.jpg) no-repeat center center;
-    background-size: cover;
-}
-
 .banner h2 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 3em;
 }
-
-.banner ul {
-    margin-bottom: 30px;
-}
-
-.banner-social-buttons {
-    float: right;
-    margin-top: 0;
-}
-
-
-
-@media(max-width:1199px) {
-    ul.banner-social-buttons {
-        float: left;
-        margin-top: 15px;
-    }
-}
-
-@media(max-width:767px) {
-    .banner h2 {
-        margin: 0;
-        text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
-        font-size: 3em;
-    }
-
-    ul.banner-social-buttons > li {
-        display: block;
-        margin-bottom: 20px;
-        padding: 0;
-    }
-
-    ul.banner-social-buttons > li:last-child {
-        margin-bottom: 0;
-    }
-}
-
