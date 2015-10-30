@@ -63,12 +63,7 @@
 
 <!-- Header -->
     <a name="about"></a>
-    <div class="main_bg" style="padding-top: 50px; padding-bottom: 50px;
-    text-align: center;
-    background: url(<%= asset_path 'landingpage.jpg' %>);
-    background-size: 100%;
-    color: #f8f8f8;
-    ">
+    <div class="main_bg">
         <div class="container">
 
             <div class="row">
@@ -83,10 +78,10 @@
 
                         <ul class="list-inline intro-social-buttons">
                             <li>
-                                <a class="btn btn-lg btn-primary" href="#" role="button">Sign up</a>
+                              <%= link_to "Sign up", new_user_registration_path, :class => "btn btn-lg btn-primary"  %>
                             </li> 
                             <li>
-                                <a class="btn btn-lg btn-primary" href="#" role="button">Log in</a>
+                              <%= link_to "Login", new_user_session_path, :class => "btn btn-lg btn-primary"  %>
                             </li>
                         </ul>
                     </div>
@@ -109,20 +104,20 @@
       <!-- Three columns of text below the carousel -->
       <div class="row">
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="160" height="160">
+          <h2>Share your up-to-date calendar easily.</h2>
           <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="160" height="160">
+          <h2>Choose what to share with privacy settings.</h2>
           <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
-          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-          <h2>Heading</h2>
+          <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="160" height="160">
+          <h2>Keep track of social groups in convenient tabs.</h2>
           <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
           <p><a class="btn btn-default" href="#" role="button">View details &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
