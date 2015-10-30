@@ -18,9 +18,12 @@ ActiveRecord::Schema.define(version: 20151029223442) do
     t.text     "description"
     t.datetime "start_time"
     t.datetime "end_time"
+    t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
