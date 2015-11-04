@@ -6,6 +6,7 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
 </head>
 <body>
 
@@ -13,9 +14,9 @@
     <div class="container">
       <p class="navbar-text">
         <% if user_signed_in? %>
-        <%= link_to 'Schedulr', events_path, :class => "navbar-link" %>
+        <%= link_to 'Schedulr', events_path, {:class => "navbar-link", :style => "font-family: 'Bitter', serif; font-size: x-large;"} %>
         <% else %>
-        <%= link_to 'Schedulr', root_url, :class => "navbar-link" %>
+        <%= link_to 'Schedulr', root_url, {:class => "navbar-link", :style => "font-family: 'Bitter', serif; font-size: x-large;"} %>
         <% end %>
       </p>
       <p class="navbar-text pull-right">
