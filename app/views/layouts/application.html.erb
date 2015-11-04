@@ -9,20 +9,28 @@
 </head>
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-  <p class="navbar-text pull-right">
-  <% if user_signed_in? %>
-    Logged in as <strong><%= current_user.email %></strong>.
-    <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-    <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-  <% else %>
-    <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-    <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-  <% end %>
-  </div>
-</nav>
-<% flash.each do |key, value| %>
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <p class="navbar-text">
+        <% if user_signed_in? %>
+        <%= link_to 'Schedulr', events_path, :class => "navbar-link" %>
+        <% else %>
+        <%= link_to 'Schedulr', root_url, :class => "navbar-link" %>
+        <% end %>
+      </p>
+      <p class="navbar-text pull-right">
+        <% if user_signed_in? %>
+        Logged in as <strong><%= current_user.email %></strong>.
+        <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+        <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+        <% else %>
+        <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+        <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+        <% end %>
+            </p>
+      </div>
+  </nav>
+  <% flash.each do |key, value| %>
   <div class="alert alert-<%= key %>">
     <a href="#" data-dismiss="alert" class="close">×</a>
     <ul>
@@ -31,8 +39,8 @@
       </li>
     </ul>
   </div>
-<% end %>
-<%= yield %>
+  <% end %>
+  <%= yield %>
 </body>
 
 </html>
