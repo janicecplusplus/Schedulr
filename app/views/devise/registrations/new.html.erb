@@ -18,6 +18,8 @@
             <br>
             <%= f.label :password_confirmation, 'Password Confirmation', class: 'sr-only' %>
             <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg', placeholder: 'Password Confirmation' %>
+            <br>
+            <p align = "right"><%= render "devise/shared/links" %></p>
             <hr>
             <%= f.submit "Sign me up!", class: 'btn btn-lg btn-primary btn-block' %>
             <% end %>
