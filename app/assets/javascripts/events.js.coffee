@@ -8,8 +8,9 @@ $(document).ready ->
     editable: true,
     header:
       left: 'title',
-      right: 'prev,next today',
       center: '',
+      right: 'prev,today,next',
+    titleFormat: 'MMMM yyyy',
     defaultView: 'agendaWeek',
     height: 500,
     slotMinutes: 30,
