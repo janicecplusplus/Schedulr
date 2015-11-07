@@ -8,7 +8,6 @@
 
 
 User.create({ email: "enyu@gmail.com" })
-User.create({ email: "andy@gmail.com" })
 User.create({ email: "janice@gmail.com" })
 User.create({ email: "tanay@gmail.com" })
 User.create({ email: "nisarg@gmail.com" })

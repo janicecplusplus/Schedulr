@@ -12,7 +12,11 @@ class FriendshipsController < ApplicationController
   end
   def destroy
     @friendship = current_user.friendships.where(:friend_id => params[:friend_id])
-    @friendship[0].destroy
+    if (@friendship.length != 0)
+      @friendship[0].destroy
+    else
+      current_user.inverted_friendships.where(:user_id => params[:friend_id])[0].destroy
+    end
     flash[:notice] = "Removed friendship :("
     redirect_to users_path
   end
