@@ -13,11 +13,9 @@ $(document).ready ->
     defaultView: 'agendaWeek',
     height: 500,
     slotMinutes: 30,
-
-    eventSources: [{
-      url: '/events',
-    }],
-
+    events: '/events.json',
+    allDayDefault: false,
+    firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
     dragOpacity: "0.5"
 
