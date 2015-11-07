@@ -7,9 +7,9 @@ $(document).ready ->
   $('#calendar').fullCalendar
     editable: true,
     header:
-      left: '',
-      center: 'title',
+      left: 'title',
       right: 'prev,next today',
+      center: '',
     defaultView: 'agendaWeek',
     height: 500,
     slotMinutes: 30,
