@@ -6,6 +6,12 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = current_user.events
+    @users = User.all
+    for user in @users
+      if current_user.friends.include? user or current_user.inverted_friends.include? user
+        @events.concat(user.events)
+      end
+    end
   end
 
   # GET /events/1
