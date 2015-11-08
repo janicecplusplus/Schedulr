@@ -2,17 +2,24 @@
 	<div class="profile-sidebar">
 		<!-- SIDEBAR USERPIC -->
 		<div class="profile-userpic">
-			<!-- Temporary image -->
-			<img src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/128.jpg" class="img-responsive" alt="">
+			<%= image_tag(current_user.avatar.url(:crop), class: "img-responsive") %>
 		</div>
 		<!-- END SIDEBAR USERPIC -->
 		<!-- SIDEBAR USER TITLE -->
 		<div class="profile-usertitle">
 			<div class="profile-usertitle-name">
-				User's name
+				<% if current_user.firstname != nil and current_user.lastname != nil %>
+					<%= current_user.firstname %> <%=current_user.lastname %>
+				<% else %>
+					(update your name in 'Edit Profile')
+				<% end %>
 			</div>
 			<div class="profile-usertitle-username">
-				Username
+				<% if current_user.username != nil %>
+					<%= current_user.username %>
+				<% else %>
+					(update your username in 'Edit Profile')
+				<% end %>
 			</div>
 			<div class="profile-usertitle-email">
 				<%= current_user.email %>
