@@ -14,4 +14,11 @@ class User < ActiveRecord::Base
 
   has_attached_file :avatar, :styles => { :crop => "100x100#" }, :default_url => ActionController::Base.helpers.asset_path('missingpic.png')
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
+
+  groupify :group_member
+  groupify :named_group_member
+end
+
+class Assignment < ActiveRecord::Base
+  groupify :group_member
 end

@@ -36,6 +36,11 @@ class EventsController < ApplicationController
         format.json { render json: @event.errors, status: :unprocessable_entity }
       end
     end
+
+    group = Group.new
+    user = current_user
+    group.add user
+
   end
 
   # PATCH/PUT /events/1
