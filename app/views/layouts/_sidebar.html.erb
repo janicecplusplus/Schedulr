@@ -1,0 +1,47 @@
+<div class="col-md-3">
+	<div class="profile-sidebar">
+		<!-- SIDEBAR USERPIC -->
+		<div class="profile-userpic">
+			<%= image_tag(current_user.avatar.url(:crop), class: "img-responsive") %>
+		</div>
+		<!-- END SIDEBAR USERPIC -->
+		<!-- SIDEBAR USER TITLE -->
+		<div class="profile-usertitle">
+			<div class="profile-usertitle-name">
+				<% if current_user.firstname != nil and current_user.lastname != nil %>
+					<%= current_user.firstname %> <%=current_user.lastname %>
+				<% else %>
+					(update your name in 'Edit Profile')
+				<% end %>
+			</div>
+			<div class="profile-usertitle-username">
+				<% if current_user.username != nil %>
+					<%= current_user.username %>
+				<% else %>
+					(update your username in 'Edit Profile')
+				<% end %>
+			</div>
+			<div class="profile-usertitle-email">
+				<%= current_user.email %>
+			</div>
+		</div>
+		<!-- SIDEBAR MENU -->
+		<div class="profile-usermenu">
+			<ul class="nav">
+				<li class="active">
+					<a href="#"> My Calendar </a>
+				</li>
+				<li>
+					<a href="#"> Group 1 </a>
+				</li>
+				<li>
+					<a href="#"> Group 2 </a>
+				</li>
+				<li>
+					<a href="#"> Group 3 </a>
+				</li>
+			</ul>
+		</div>
+		<!-- END MENU -->
+	</div>
+</div>
