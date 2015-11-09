@@ -2,6 +2,8 @@ class GroupifyMigration < ActiveRecord::Migration
   def change
     create_table :groups do |t|
       t.string     :type
+      t.string :title
+      t.text :description
     end
 
     create_table :group_memberships do |t|

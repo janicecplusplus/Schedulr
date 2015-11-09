@@ -48,7 +48,9 @@ ActiveRecord::Schema.define(version: 20151109015848) do
   add_index "group_memberships", ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
-    t.string "type", limit: 255
+    t.string "type",        limit: 255
+    t.string "title",       limit: 255
+    t.text   "description", limit: 65535
   end
 
   create_table "users", force: :cascade do |t|
