@@ -21,6 +21,7 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
+    @friends = User.all #TODO: Change to current_user.friends
   end
 
   # GET /groups/1/edit
@@ -30,8 +31,11 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(group_params)
-    @group.add current_user
+    @group = Group.new(group_params) #(description: description, title: )
+    @members = group_params[:members]
+    for member in @members
+      @group.add member
+    end
 
     respond_to do |format|
       if @group.save
