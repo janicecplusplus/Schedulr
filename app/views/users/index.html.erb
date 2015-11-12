@@ -1,29 +1,55 @@
-<h2>Users</h2>
+<% if @user.inverted_friendships.where(confirmed: 0).count != 0 %>
+  <h2>Friend Requests</h2>
+  <ul>
+    <% for friendship in @user.inverted_friendships %>
+      <% if friendship.confirmed == 0 %>
+        <li>
+          <%= friendship.user.email %>
+          <%= link_to "Confirm Friend", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>Friends</h2>
 <ul>
-  <% for user in @users %>
-    <% if user != current_user %>
+  <% for friendship in @user.inverted_friendships %>
+    <% if friendship.confirmed == 1 %>
       <li>
-        <%= user.email %>
-        <% if current_user.friends.include? user or current_user.inverted_friends.include? user %>
-          <%= link_to "Remove Friend", friendship_path(:friend_id => user.id, :id => current_user), :method => :delete %>
-        <% else %>
-          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
-        <% end %>
+        <%= friendship.user.email %>
+        <%= link_to "Remove Friend", {:action => :destroy, :id => friendship.user_id, :controller => :friendships}, :method => :delete %>
+      </li>
+    <% end %>
+  <% end %>
+  <% for friendship in @user.friendships %>
+    <% if friendship.confirmed == 1 %>
+      <li>
+        <%= friendship.friend.email %>
+        <%= link_to "Remove Friend", {:action => :destroy, :id => friendship.friend_id, :controller => :friendships}, :method => :delete %>
       </li>
     <% end %>
   <% end %>
 </ul>
 
-<h2>Friends</h2>
+<h2>Other Users</h2>
 <ul>
-  <% for friend in current_user.friends %>
-    <li>
-      <%= friend.email %>
-    </li>
+  <% for user in @users %>
+    <% if user != current_user %>
+      <% if !current_user.friends.include? user and !current_user.inverted_friends.include? user %>
+        <li>
+          <%= user.email %>
+          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
+        </li>
+      <% end %>
+    <% end %>
   <% end %>
-  <% for friend in current_user.inverted_friends %>
-    <li>
-      <%= friend.email %>
-    </li>
+  <% for friendship in @user.friendships %>
+    <% if friendship.confirmed == 0 %>
+      <li>
+        <%= friendship.friend.email %>
+        <font color=gray>Friend Request Sent</font>
+      </li>
+    <% end %>
   <% end %>
 </ul>
