@@ -13,8 +13,11 @@
             <%= f.label :email, 'Email Address', class: 'sr-only' %>
             <%= f.email_field :email, autofocus: true, class: 'form-control input-lg', placeholder: 'Email Address' %>
             <br>
+            <%= f.label :username, 'Username', class: 'sr-only' %>
+            <%= f.text_field :username, autofocus: true, class: 'form-control input-lg', placeholder: 'Username' %>
+            <br>
             <%= f.label :password, 'Password', class: 'sr-only' %>
-            <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg', placeholder: 'Password (8 characters minimum)' %>
+            <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg', placeholder: 'Password (8 characters min)' %>
             <br>
             <%= f.label :password_confirmation, 'Password Confirmation', class: 'sr-only' %>
             <%= f.password_field :password, autocomplete: "off", class: 'form-control input-lg', placeholder: 'Password Confirmation' %>
