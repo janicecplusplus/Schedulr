@@ -44,4 +44,12 @@
       <% end %>
     <% end %>
   <% end %>
+  <% for friendship in @user.friendships %>
+    <% if friendship.confirmed == 0 %>
+      <li>
+        <%= friendship.friend.email %>
+        <font color=gray>Friend Request Sent</font>
+      </li>
+    <% end %>
+  <% end %>
 </ul>
