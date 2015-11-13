@@ -33,9 +33,9 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params) #(description: description, title: )
     @members = group_params[:members]
-    for member in @members
-      @group.add member
-    end
+    # for member in @members
+    #   @group.add member
+    # end
 
     respond_to do |format|
       if @group.save
@@ -80,6 +80,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:title, :description)
+      params.require(:group).permit(:title, :description, :members)
     end
 end
