@@ -31,11 +31,14 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(group_params) #(description: description, title: )
-    @members = group_params[:members]
-    # for member in @members
-    #   @group.add member
-    # end
+    @group = Group.new(title: params[:group][:title], description: params[:group][:description]) #(description: description, title: )
+    @members = params[:group][:members]
+
+    for member in @members
+      if (member != "")
+        @group.add(User.where(:username => member).first)
+      end
+    end
 
     respond_to do |format|
       if @group.save
@@ -46,6 +49,9 @@ class GroupsController < ApplicationController
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
+
+
+
   end
 
   # PATCH/PUT /groups/1
