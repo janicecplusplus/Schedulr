@@ -29,14 +29,8 @@
   </div>
   <div class="field">
     <%= f.label :members %><br>
-    <%= f.select "members", options_from_collection_for_select(@friends, "username", "username"), {}, { class: 'chosen-select', multiple:true} %>
+    <%= f.select :members, options_from_collection_for_select(@friends, "username", "username"), {}, { class: 'chosen-select', multiple:true, :style => "min-width:300px;"}%>
   </div>
- 
-  <!--<select style="width:550px" multiple class="chosen-select" name="post[members]">
-    <% for friend in @friends %>
-      <option><%= friend.username %></option>
-    <% end %>
-  </select>-->
 
   <br/><br/>
   <div class="actions">
@@ -49,7 +43,6 @@
       '.chosen-select'           : {},
       '.chosen-select-deselect'  : {allow_single_deselect:true},
       '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
-      '.chosen-select-width'     : {width:"95%"},
       'max_selected_options'     : 5
     }
     for (var selector in config) {

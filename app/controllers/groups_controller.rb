@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET /groups
   # GET /groups.json
   def index
@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
   def show
     @group = Group.find(params[:id])
     @users = @group.users
-    @events = current_user.events
+    @events = Array.new
     for user in @users
       @events.concat(user.events)
     end
@@ -21,19 +21,22 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-    @friends = User.all #TODO: Change to current_user.friends
+    @friends = User.all 
   end
 
   # GET /groups/1/edit
   def edit
+    @group = Group.find(params[:id])
+    @friends = User.all
   end
 
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(title: params[:group][:title], description: params[:group][:description]) #(description: description, title: )
+    @group = Group.new(title: params[:group][:title], description: params[:group][:description]) 
     @members = params[:group][:members]
 
+    @group.add(current_user) 
     for member in @members
       if (member != "")
         @group.add(User.where(:username => member).first)
@@ -58,7 +61,7 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1.json
   def update
     respond_to do |format|
-      if @group.update(group_params)
+      if @group.update(title: params[:group][:title], description: params[:group][:description])
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
       else
@@ -86,6 +89,6 @@ class GroupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
-      params.require(:group).permit(:title, :description, :members)
+      #params.require(:group, :title, :description, :members)
     end
 end
