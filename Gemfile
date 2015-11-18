@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'chosen-rails'
 gem 'groupify'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.2.0'
