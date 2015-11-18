@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :events
   resources :friendships
   put '/friendships/:friend_id' => 'friendships#confirm', as: :confirm_friend
-  resources :users, :only => [:index]
+  resources :users, :only => [:index, :show]
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

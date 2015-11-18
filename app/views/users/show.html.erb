@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<p>
+  <strong>Username:</strong>
+  <%= @user.username %>
+</p>
+
+<% if @is_friend %>
+  <div id="calendar"> </div>
+<% else %>
+  <p>You are not friends with that user</p>
+<% end %>
+
+<%= link_to 'Back', users_path %>
