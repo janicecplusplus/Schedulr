@@ -21,13 +21,15 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-    @friends = User.all 
+    @friends = User.all
+    @groupmembers = @group.users
   end
 
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
     @friends = User.all
+    @groupmembers = @group.users
   end
 
   # POST /groups
@@ -62,11 +64,23 @@ class GroupsController < ApplicationController
   def update
     respond_to do |format|
       if @group.update(title: params[:group][:title], description: params[:group][:description])
+
+        @group.users.delete(User.all)
+
+        @members = params[:group][:members]
+        for member in @members
+          if (member != "")
+            @group.add(User.where(:username => member).first)
+          end
+        end
+
         format.html { redirect_to @group, notice: 'Group was successfully updated.' }
         format.json { render :show, status: :ok, location: @group }
+
       else
         format.html { render :edit }
         format.json { render json: @group.errors, status: :unprocessable_entity }
+
       end
     end
   end

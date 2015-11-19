@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <link href='/app/assets/stylesheets/chosen.css' rel='stylesheet' type='text/css'>
-  <script src='/app/assets/javascripts/chosen.jquery.min.js'></script>
-</head>
-<body>
-
+<link href='/app/assets/stylesheets/chosen.css' rel='stylesheet' type='text/css'>
+<script src='/app/assets/javascripts/chosen.jquery.min.js'></script>
 <%= form_for(@group) do |f| %>
   <% if @group.errors.any? %>
     <div id="error_explanation">
@@ -29,7 +23,10 @@
   </div>
   <div class="field">
     <%= f.label :members %><br>
-    <%= f.select :members, options_from_collection_for_select(@friends, "username", "username"), {}, { class: 'chosen-select', multiple:true, :style => "min-width:300px;"}%>
+    <%= f.select :members, options_for_select(
+    @friends.map {|fr| [fr.username, fr.username]}, 
+    @groupmembers.map {|gm| gm.username}
+), {}, { class: 'chosen-select', multiple:true, :style => "min-width:300px;"}%>
   </div>
 
   <br/><br/>
@@ -37,7 +34,6 @@
     <%= f.submit %>
   </div>
 <% end %>
-
 <script type="text/javascript">
     var config = {
       '.chosen-select'           : {},
@@ -48,6 +44,4 @@
     for (var selector in config) {
       $(selector).chosen(config[selector]);
     }
-  </script>
-</body>
-</html>
+</script>
