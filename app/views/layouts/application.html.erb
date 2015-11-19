@@ -7,6 +7,7 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href='https://fonts.googleapis.com/css?family=Bitter' rel='stylesheet' type='text/css'>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 
@@ -19,46 +20,70 @@
         <%= link_to 'Schedulr', root_url, {:class => "navbar-link", :style => "font-family: 'Bitter', serif; font-size: x-large;"} %>
         <% end %>
       </p>
-      <p class="navbar-text pull-right">
+      <div class="navbar-text pull-right">
         <% if user_signed_in? %>
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-        <% end %>
-      </p>
-    </div>
-  </nav>
-  <% flash.each do |key, value| %>
-  <div class="alert alert-<%= key %>">
-    <a href="#" data-dismiss="alert" class="close">×</a>
-    <ul>
-      <li>
-        <%= value %>
-      </li>
-    </ul>
-  </div>
-  <% end %>
-
-  <!-- SIDEBAR -->
-  <% if user_signed_in? %>
-  <div style="margin: 0px 20px">
-    <div class="row profile">
-      <%= render 'layouts/sidebar' %>
-      <div class="col-md-9">
-        <div class="profile-content">
-          <%= yield %>
+        <a class="dropdown-toggle btn btn-default btn-circle" data-toggle="dropdown"> <%= current_user.inverted_friendships.where(confirmed: 0).count %></a>
+        <ul class="dropdown-menu" style="position: absolute;">
+          <div class="notif-body">
+          <% if current_user.inverted_friendships.where(confirmed: 0).count != 0 %>
+          <b>Friend Requests:</b>
+          <% for friendship in current_user.inverted_friendships %>
+          <% if friendship.confirmed == 0 %>
+          <li>
+            <%= friendship.user.email %>
+            <!-- glyphicons not working
+            <%= link_to "<span class=\"glyphicon glyphicon-ok\"></span>".html_safe, {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle" %> -->
+            <%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %>
+          </li>
+          <% end %>
+          <% end %>
         </div>
+          <% else %>
+          <div class="notif-body">
+            No New Friend Requests!
+          </div>
+          <% end %>
+        <% end %> <!-- end user_signed_in -->
+        </ul>
+      <% if user_signed_in? %>
+      <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+      <% else %>
+      <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link' %> |
+      <%= link_to "Login", new_user_session_path, :class => 'navbar-link' %>
+      <% end %>
+    </div>
+  </div>
+</nav>
+<% flash.each do |key, value| %>
+<div class="alert alert-<%= key %>">
+  <a href="#" data-dismiss="alert" class="close">×</a>
+  <ul>
+    <li>
+      <%= value %>
+    </li>
+  </ul>
+</div>
+<% end %>
+
+<!-- SIDEBAR -->
+<% if user_signed_in? %>
+<div style="margin: 0px 20px">
+  <div class="row profile">
+    <%= render 'layouts/sidebar' %>
+    <div class="col-md-9">
+      <div class="profile-content">
+        <%= yield %>
       </div>
     </div>
   </div>
-  <% else %>
-  <%= yield %>
-  <% end %>
+</div>
+<% else %>
+<%= yield %>
+<% end %>
 
-  <!-- FOOTER -->
-  <%= render 'layouts/footer' unless current_page?(new_user_session_path) or current_page?(new_user_registration_path) %>
+<!-- FOOTER -->
+<%= render 'layouts/footer' unless current_page?(new_user_session_path) or current_page?(new_user_registration_path) %>
 
 </body>
 </html>
