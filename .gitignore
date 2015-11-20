@@ -2,6 +2,10 @@
 /db/*.sqlite3
 /db/*.sqlite3-journal
 
+#Credentials. DONT REMOVE THIS 
+/tsung_test/J10.pem
+/tsung_test/J10.txt
+
 # Ignore all tempfiles
 /log/*
 /tmp
