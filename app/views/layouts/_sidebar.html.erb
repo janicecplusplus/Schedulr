@@ -34,14 +34,13 @@
 				<li>
 					<a href= <%= users_path %>> My Friends </a>
 				</li>
+				<% for group in current_user.groups %>
 				<li>
-					<a href="#"> Group 1 </a>
+					<%= link_to "#{group.title}", group %>
 				</li>
+				<%end%>
 				<li>
-					<a href="#"> Group 2 </a>
-				</li>
-				<li>
-					<a href="#"> Group 3 </a>
+					<a href= <%= new_group_path %>> Create New Group </a>
 				</li>
 			</ul>
 		</div>
