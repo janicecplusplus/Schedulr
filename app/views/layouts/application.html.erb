@@ -23,7 +23,7 @@
       <div class="navbar-text pull-right">
         <% if user_signed_in? %>
         <a class="dropdown-toggle btn btn-default btn-circle" data-toggle="dropdown"> <%= current_user.inverted_friendships.where(confirmed: 0).count %></a>
-        <ul class="dropdown-menu" style="position: absolute;">
+        <ul class="dropdown-menu" style="margin-right: 50px;">
           <div class="notif-body">
           <% if current_user.inverted_friendships.where(confirmed: 0).count != 0 %>
           <b>Friend Requests:</b>
