@@ -6,13 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-User.create([
-  { email: "enyu@gmail.com", username: "enyu", password: "corncorn" },
-  { email: "janice@gmail.com", username: "janice", password: "blahblah" },
-  { email: "tanay@gmail.com", username: "tanay", password: "hahahaha" },
-  { email: "nisarg@gmail.com", username: "nisarg", password: "lolololol" }
-])
+User.create! :username => 'nisarg', :email => 'nisarg@gmail.com', :id => 114, :password => '12345678', :password_confirmation => '12345678'
+User.create! :username => 'tanay', :email => 'tanay@gmail.com', :id => 111, :password => '12345678', :password_confirmation => '12345678'
+User.create! :username => 'janice', :email => 'janice@gmail.com', :id => 112, :password => '12345678', :password_confirmation => '12345678'
+User.create! :username => 'enyu', :email => 'enyu@gmail.com', :id => 113, :password => '12345678', :password_confirmation => '12345678'
 
 Friendship.create([
   { user_id: 1, friend_id: 2, confirmed: 0},
@@ -25,3 +22,13 @@ Event.create([
   { title: "Tanay's Event", start_time: "2015-11-12 19:00:00", end_time: "2015-11-12 20:00:00", user_id: 3},
   { title: "Nisarg's Event", start_time: "2015-11-12 19:30:00", end_time: "2015-11-12 20:30:00", user_id: 4}
 ])
+
+Group.create({id: 36, title: "Group 1", description: "Group 1 Test"})
+Group.create({id: 37, title: "Group 2", description: "Group 2 Test"})
+
+GroupMembership.create(group_id: 36, member_id: 111, member_type: "User", group_type: "Group")
+GroupMembership.create(group_id: 36, member_id: 112, member_type: "User", group_type: "Group")
+GroupMembership.create(group_id: 36, member_id: 113, member_type: "User", group_type: "Group")
+GroupMembership.create(group_id: 36, member_id: 114, member_type: "User", group_type: "Group")
+GroupMembership.create(group_id: 37, member_id: 111, member_type: "User", group_type: "Group")
+GroupMembership.create(group_id: 37, member_id: 112, member_type: "User", group_type: "Group")

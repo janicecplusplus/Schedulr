@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<div style="float:right">
+	<%= link_to 'Edit', edit_group_path(@group) %>
+</div>
+<p>
+  <strong>Title:</strong>
+  <%= @group.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @group.description %>
+</p>
+
+<p>
+  <strong>Users in this group:</strong>
+  <% @users.each_with_index do |user, index| %>
+  		<%= user.username%>
+  		<% if index != @users.size - 1 %>
+  			<%= ',' %>
+  		<% end %>
+  <%end%>
+</p>
+
+<div id="calendar">
+  </div>
