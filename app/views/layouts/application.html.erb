@@ -21,16 +21,17 @@
         <% end %>
       </p>
       <div class="navbar-text pull-right">
-        <% if user_signed_in? %>
+        <!--hope not to use this.. && request.env['PATH_INFO'] != edit_user_registration_path -->
+        <% if user_signed_in?%>
         <a class="dropdown-toggle btn btn-default btn-circle" data-toggle="dropdown"> <%= current_user.inverted_friendships.where(confirmed: 0).count %></a>
-        <ul class="dropdown-menu" style="position: absolute;">
+        <ul class="dropdown-menu" style="margin-right: 50px;">
           <div class="notif-body">
           <% if current_user.inverted_friendships.where(confirmed: 0).count != 0 %>
-          <b>Friend Requests:</b>
+          <b>Friend Requests:</b><br>
           <% for friendship in current_user.inverted_friendships %>
           <% if friendship.confirmed == 0 %>
           <li>
-            <%= friendship.user.email %>
+            <%= friendship.user.username %>
             <!-- glyphicons not working
             <%= link_to "<span class=\"glyphicon glyphicon-ok\"></span>".html_safe, {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle" %> -->
             <%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %>
@@ -40,6 +41,7 @@
         </div>
           <% else %>
           <div class="notif-body">
+          <b>Friend Requests:</b><br>
             No New Friend Requests!
           </div>
           <% end %>
