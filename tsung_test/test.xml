@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
 <tsung loglevel="notice" version="1.0">
+<!-- Use this instead for log dumps <tsung loglevel="notice" version="1.0" dumptraffic="true"> -->
 
   <!-- Client side setup -->
   <clients>
@@ -9,21 +10,14 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-27-107-83.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-32-214-70.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="30" unit="second">
+    <arrivalphase phase="1" duration="1" unit="second">
       <users arrivalrate="1" unit="second"></users>
     </arrivalphase>
-    <arrivalphase phase="2" duration="30" unit="second">
-      <users arrivalrate="2" unit="second"></users>
-    </arrivalphase>
-    <arrivalphase phase="3" duration="30" unit="second">
-      <users arrivalrate="4" unit="second"></users>
-    </arrivalphase>
-
   </load>
 
   <options>
@@ -65,12 +59,71 @@
           url='/users'
           version='1.1'
           method='POST'
-          contents='user%5Bemail%5D:%%_rand_user_num%%%40blah.com&amp;
-          user%5Busername%5D:%%_rand_user_num%%&amp;
-          user%5Bpassword%5D:12345678&amp;
-          user%5Bpassword_confirmation%5D:12345678&amp;
-          commit:Sign+me+up%21'>
+          contents='user%5Bemail%5D=%%_rand_user_num%%%40blah.com&amp;
+          user%5Busername%5D=%%_rand_user_num%%&amp;
+          user%5Bpassword%5D=12345678&amp;
+          user%5Bpassword_confirmation%5D=12345678&amp;
+          commit=Sign+me+up%21'>
         </http>
+      </request>
+      
+      <thinktime value="2" random="true"></thinktime>
+
+      <!-- Render new event page -->
+      <request>
+          <http url='/events/new' version='1.1' method='GET'></http>
+      </request>
+      
+      <thinktime value="2" random="true"></thinktime>
+      
+      <!-- Post Event Creation -->
+      <setdynvars sourcetype="random_string" length="20">
+          <var name="event_title" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_string" length="60">
+          <var name="event_description" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_number" start="1" end="12">
+          <var name="event_month" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_number" start="1" end="28">
+          <var name="event_day" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_number" start="0" end="23">
+          <var name="event_hour" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_number" start="0" end="29">
+          <var name="start_minute" />
+      </setdynvars>
+      
+      <setdynvars sourcetype="random_number" start="30" end="59">
+          <var name="end_minute" />
+      </setdynvars>
+      
+      <request subst="true">
+          <http
+              url='/events'
+              version='1.1'
+              method='POST'
+              contents='event%5Btitle%5D=%%_event_title%%&amp;
+              event%5Bdescription%5D=%%_event_description%%&amp;
+              event%5Bstart_time%281i%29%5D=2015&amp; 
+              event%5Bstart_time%282i%29%5D=%%_event_month%%&amp; 
+              event%5Bstart_time%283i%29%5D=%%_event_day%%&amp;
+              event%5Bstart_time%284i%29%5D=%%_event_hour%%&amp;
+              event%5Bstart_time%285i%29%5D=%%_start_minute%%&amp;
+              event%5Bend_time%281i%29%5D=2015&amp;
+              event%5Bend_time%282i%29%5D=%%_event_month%%&amp;
+              event%5Bend_time%283i%29%5D=%%_event_day%%&amp;
+              event%5Bend_time%284i%29%5D=%%_event_hour%%&amp;
+              event%5Bend_time%285i%29%5D=%%_end_minute%%&amp;
+              commit=Create+Event'>
+          </http>
       </request>
 
       <!-- send signout request -->
@@ -79,7 +132,7 @@
           url='/users/sign_out'
           version='1.1'
           method='POST'
-          contents='_method: delete'>
+          contents='_method=delete'>
         </http>
       </request>
 
