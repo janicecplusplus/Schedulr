@@ -1,28 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<div style="float:right">
-	<%= link_to 'Edit', edit_group_path(@group) %> | 
-  <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Are you sure?' } %>
-</div>
-<p>
-  <strong>Title:</strong>
+<div class="row">
+  <div class="col-md-6">
+<p style="text-align: center; color: #9094da; font-size: 40px; padding-top: 10px;">
   <%= @group.title %>
+  </p>
+  <p style="text-align: center">
+  <i><%= @group.description %></i>
 </p>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @group.description %>
-</p>
-
-<p>
+<div class="col-md-6" style="padding-top: 5px;">
+<p style="text-align: center">
   <strong>Users in this group:</strong>
   <% @users.each_with_index do |user, index| %>
-  		<%= user.username%>
-  		<% if index != @users.size - 1 %>
-  			<%= ',' %>
-  		<% end %>
+  <%= user.username %>
+  <% if index != @users.size - 1 %>
+  <%=','%>
+  <% end %>
   <%end%>
+  <br>
+
+  <div class="row" style="text-align:center;">
+    <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+        <%= link_to 'Edit', edit_group_path(@group), :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+    </div>
+    <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+        <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+    </div>
+        <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+        <%= link_to 'Leave', @group, data: { confirm: 'Sorry, you can never leave; at least not yet..' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+    </div>
+  </div>
+  <br>
 </p>
+</div>
+</div>
 
 <div id="calendar">
-  </div>
+</div>

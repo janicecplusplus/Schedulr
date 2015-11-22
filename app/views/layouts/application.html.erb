@@ -21,7 +21,8 @@
         <% end %>
       </p>
       <div class="navbar-text pull-right">
-        <% if user_signed_in? %>
+        <!--hope not to use this.. && request.env['PATH_INFO'] != edit_user_registration_path -->
+        <% if user_signed_in?%>
         <a class="dropdown-toggle btn btn-default btn-circle" data-toggle="dropdown"> <%= current_user.inverted_friendships.where(confirmed: 0).count %></a>
         <ul class="dropdown-menu" style="margin-right: 50px;">
           <div class="notif-body">

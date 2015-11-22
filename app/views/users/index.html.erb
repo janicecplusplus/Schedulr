@@ -1,55 +1,106 @@
 <% if @user.inverted_friendships.where(confirmed: 0).count != 0 %>
-  <h2>Friend Requests</h2>
-  <ul>
+  <p class= "f-header">Friend requests</p>
+  <div class="row">
     <% for friendship in @user.inverted_friendships %>
       <% if friendship.confirmed == 0 %>
-        <li>
-          <%= friendship.user.email %>
-          <%= link_to "Confirm Friend", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put %>
-        </li>
+        <div class="col-md-3 userDisplay">
+          <div class="col-md-4 userDisplayPic">
+            <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+            <%= link_to "Accept", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+          </div>
+          <div class="col-md-8 userDisplayDetails">
+          <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
+          <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
+        <% else %>
+          <div class="userDisplayName">No Name</div>
+        <% end %>
+          <%= friendship.user.username %><br><%= friendship.user.email %>
+      </div>
+      </div>
       <% end %>
     <% end %>
-  </ul>
+</div>
 <% end %>
 
-<h2>Friends</h2>
-<ul>
+<p class= "f-header">Friends</p>
+<div class="row">
   <% for friendship in @user.inverted_friendships %>
     <% if friendship.confirmed == 1 %>
-      <li>
-        <%= friendship.user.email %>
-        <%= link_to "Remove Friend", {:action => :destroy, :id => friendship.user_id, :controller => :friendships}, :method => :delete %>
-      </li>
+        <div class="col-md-3 userDisplay">
+          <div class="col-md-4 userDisplayPic">
+          <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                           <%= link_to "Remove", {:action => :destroy, :id => friendship.user_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+        </div>
+        <div class="col-md-8 userDisplayDetails">
+          <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
+          <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
+        <% else %>
+          <div class="userDisplayName">No Name</div>
+        <% end %>
+          <%= friendship.user.username %><br><%= friendship.user.email %>
+      </div>
+      </div>
     <% end %>
   <% end %>
   <% for friendship in @user.friendships %>
     <% if friendship.confirmed == 1 %>
-      <li>
-        <%= friendship.friend.email %>
-        <%= link_to "Remove Friend", {:action => :destroy, :id => friendship.friend_id, :controller => :friendships}, :method => :delete %>
-      </li>
+        <div class="col-md-3 userDisplay">
+          <div class="col-md-4 userDisplayPic">
+          <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                           <%= link_to "Remove", {:action => :destroy, :id => friendship.friend_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+        </div>
+        <div class="col-md-8 userDisplayDetails">
+          <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
+          <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
+        <% else %>
+          <div class="userDisplayName">No Name</div>
+        <% end %>
+          <%= friendship.friend.username %><br><%= friendship.friend.email %>
+      </div>
+      </div>
     <% end %>
   <% end %>
-</ul>
+</div>
 
-<h2>Other Users</h2>
-<ul>
+<p class="f-header">Other Users</p>
+<div class="row">
   <% for user in @users %>
     <% if user != current_user %>
       <% if !current_user.friends.include? user and !current_user.inverted_friends.include? user %>
-        <li>
-          <%= user.email %>
-          <%= link_to "Add Friend", friendships_path(:friend_id => user), :method => :post %>
-        </li>
+          <div class="col-md-3 userDisplay">
+          <div class="col-md-4 userDisplayPic">
+          <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+          <%= link_to "Request", friendships_path(:friend_id => user), :method => :post, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn"%>
+        </div>
+        <div class="col-md-8 userDisplayDetails">
+          <% if user.firstname != nil and user.lastname != nil %>
+          <div class="userDisplayName"><%= user.firstname %> <%=user.lastname %></div>
+        <% else %>
+          <div class="userDisplayName">No Name</div>
+        <% end %>
+        <%= user.username %><br><%= user.email %>
+      </div>
+      </div>
       <% end %>
     <% end %>
   <% end %>
   <% for friendship in @user.friendships %>
     <% if friendship.confirmed == 0 %>
-      <li>
-        <%= friendship.friend.email %>
-        <font color=gray>Friend Request Sent</font>
-      </li>
+    <div class="col-md-3 userDisplay">
+          <div class="col-md-4 userDisplayPic">
+          <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
+          <p style= "color: gray; font-size: 11px;">Requested</p>
+        </div>
+        <div class="col-md-8 userDisplayDetails">
+          <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
+          <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
+        <% else %>
+          <div class="userDisplayName">No Name</div>
+        <% end %>
+        <%= friendship.friend.username %><br><%= friendship.friend.email %>
+      </div>
+      </div>
+        <br>
     <% end %>
   <% end %>
-</ul>
+</div>

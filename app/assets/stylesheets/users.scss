@@ -1,3 +1,45 @@
 // Place all the styles related to the users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.f-header {
+	color: #391B50;
+	font-size: 20px;
+	padding-top: 15px;
+}
+
+.confirmBtn {
+	width: 60px;
+	display: inline-block;
+}
+
+.avatarMed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: 60px;
+	max-height: 60px;
+	-webkit-border-radius: 50% !important;
+  	-moz-border-radius: 50% !important;
+  	border-radius: 50% !important;
+  	margin-bottom: -15px;
+}
+
+.userDisplay {
+	margin: 10px 35px;
+	padding: 10px;
+}
+
+.userDisplayPic {
+	text-align: center;
+	padding-left: 0px;
+}
+
+.userDisplayDetails {
+	padding-left: 0px;
+}
+
+.userDisplayName {
+	padding-top: 5px;
+	font-weight: bold;
+}

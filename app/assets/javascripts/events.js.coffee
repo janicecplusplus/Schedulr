@@ -6,19 +6,20 @@ ready = ->
   $('#calendar').fullCalendar
     editable: true,
     header:
-      left: 'title',
-      center: '',
+      left: 'agendaWeek,agendaDay',
       right: 'prev,today,next',
     titleFormat: 'MMMM yyyy',
     defaultView: 'agendaWeek',
-    height: 500,
+    height: 450,
     slotMinutes: 30,
     events: '/events.json',
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
     editable: true,
-    dragOpacity: "0.5"
+    dragOpacity: "0.5",
+    slotEventOverlap: false,
+    eventColor: "#AFB1E4"
 
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->
       updateEvent(event);
