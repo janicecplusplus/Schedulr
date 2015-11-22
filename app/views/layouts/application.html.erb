@@ -32,9 +32,8 @@
           <% if friendship.confirmed == 0 %>
           <li>
             <%= friendship.user.username %>
-            <!-- glyphicons not working
-            <%= link_to "<span class=\"glyphicon glyphicon-ok\"></span>".html_safe, {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle" %> -->
-            <%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %>
+            <%= link_to "<span class=\"glyphicon glyphicon-ok\"></span>".html_safe, {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle" %>
+            <%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %>
           </li>
           <% end %>
           <% end %>
