@@ -21,22 +21,22 @@
         <% end %>
       </p>
       <div class="navbar-text pull-right">
-        <!--hope not to use this.. && request.env['PATH_INFO'] != edit_user_registration_path -->
         <% if user_signed_in?%>
         <a class="dropdown-toggle btn btn-default btn-circle" data-toggle="dropdown"> <%= current_user.inverted_friendships.where(confirmed: 0).count %></a>
-        <ul class="dropdown-menu" style="margin-right: 50px;">
+        <ul class="dropdown-menu" style="margin-right: 70px;">
           <div class="notif-body">
           <% if current_user.inverted_friendships.where(confirmed: 0).count != 0 %>
           <b>Friend Requests:</b><br>
           <% for friendship in current_user.inverted_friendships %>
           <% if friendship.confirmed == 0 %>
-          <li>
+          <li style="padding: 0 5px;">
             <%= friendship.user.username %>
-            <%= link_to "<span class=\"glyphicon glyphicon-ok\"></span>".html_safe, {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle" %>
-            <%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %>
+            <div style="float: right"><%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %> </div>
           </li>
           <% end %>
           <% end %>
+          <br>
+          <div style="text-align: center; font-size: 8px;"><%= link_to "See more details", users_path, :class => 'btn btn-xs btn-primary btn-block detailsBtn' %></div>
         </div>
           <% else %>
           <div class="notif-body">
