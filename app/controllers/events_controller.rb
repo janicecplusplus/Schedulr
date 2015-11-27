@@ -6,20 +6,24 @@ class EventsController < ApplicationController
   # GET /events.json
   def index
     @events = current_user.events
+    fresh_when([current_user.events, current_user.groups, current_user.inverted_friendships])
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    fresh_when([@events, current_user.groups, current_user.inverted_friendships])
   end
 
   # GET /events/new
   def new
     @event = Event.new
+    fresh_when([current_user.groups, current_user.inverted_friendships])
   end
 
   # GET /events/1/edit
   def edit
+    fresh_when([@event, current_user.groups, current_user.inverted_friendships])
   end
 
   # POST /events

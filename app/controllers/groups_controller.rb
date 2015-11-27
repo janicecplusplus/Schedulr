@@ -16,20 +16,23 @@ class GroupsController < ApplicationController
     for user in @users
       @events.concat(user.events)
     end
+    fresh_when([current_user.groups, current_user.inverted_friendships])
   end
 
   # GET /groups/new
-  def new
-    @group = Group.new
-    @friends = User.all
-    @groupmembers = @group.users
+  def new 
+      @group = Group.new 
+      @friends = get_friends
+      @groupmembers = @group.users
+      fresh_when([get_friends, current_user.groups, current_user.inverted_friendships])
   end
 
   # GET /groups/1/edit
   def edit
     @group = Group.find(params[:id])
-    @friends = User.all
+    @friends = get_friends
     @groupmembers = @group.users
+    fresh_when([get_friends, current_user.groups, current_user.inverted_friendships])
   end
 
   # POST /groups
@@ -104,5 +107,9 @@ class GroupsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def group_params
       #params.require(:group, :title, :description, :members)
+    end
+
+    def get_friends
+      User.all
     end
 end
