@@ -10,27 +10,28 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :members %><br>
+  <br>
+    <%= f.label :title, 'Title', class: 'sr-only' %>
+    <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Title" %>
+<br>
+    <%= f.label :description, 'Description', class: 'sr-only'%>
+    <%= f.text_area :description, autofocus: true, class: 'form-control', placeholder: "Description" %>
+<br>
+    <%= f.label :members, 'Members', class: 'sr-only' %>
     <%= f.select :members, options_for_select(
     @friends.map {|fr| [fr.username, fr.username]}, 
-    @groupmembers.map {|gm| gm.username}
-), {}, { class: 'chosen-select', multiple:true, :style => "min-width:300px;"}%>
+    @groupmembers.map {|gm| gm.username}), {}, { :data => { :placeholder => "Friends you'd like to be in this group" },class: 'chosen-select', multiple:true, :style => "min-width: 300px;"}%>
+<br>
+<br>
+<br>
+  <div class="row" style="text-align:center;">
+  <div class="col-xs-2" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+    <%= f.submit class: "btn btn-primary btn-block"%>
   </div>
-
-  <br/><br/>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="col-xs-2" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+    <a href="javascript:history.back()" class="btn btn-primary btn-block" role="button">Back</a>
   </div>
+</div>
 <% end %>
 <script type="text/javascript">
     var config = {
