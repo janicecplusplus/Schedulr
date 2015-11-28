@@ -61,7 +61,7 @@ for user_num in 1..(num_total_users - confirmed_friendships_per_user -unconfirme
 	end
 
 	#group creation
-	Group.create(id: user_num, title: Faker::Lorem.sentence, description: Faker::Lorem.paragraph)
+	Group.create(id: user_num, title: Faker::Company.name, description: Faker::Lorem.sentence)
 	 #starts from 0 to include current user in group
 	for group_friend_num in 0..users_per_group do
 		GroupMembership.create(
