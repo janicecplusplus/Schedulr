@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'faker'
 gem 'groupify'
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.2.0'
