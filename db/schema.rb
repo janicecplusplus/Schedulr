@@ -23,6 +23,8 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "updated_at",              null: false
   end
 
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "friend_id",  limit: 4
@@ -30,6 +32,9 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "updated_at",                       null: false
     t.integer  "confirmed",  limit: 2, default: 0
   end
+
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
 
   create_table "group_memberships", force: :cascade do |t|
     t.integer  "member_id",   limit: 4
@@ -40,6 +45,10 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "group_memberships", ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
+  add_index "group_memberships", ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id", using: :btree
+  add_index "group_memberships", ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string "type",        limit: 10

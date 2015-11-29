@@ -7,11 +7,11 @@ class GroupifyMigration < ActiveRecord::Migration
     end
 
     create_table :group_memberships do |t|
-      t.references :member, polymorphic: true ###, index: true
-      t.references :group, polymorphic: true ###, index: true
+      t.references :member, polymorphic: true, index: true
+      t.references :group, polymorphic: true, index: true
 
       # The named group to which a member belongs (if using)
-      t.string     :group_name, limit: 40 ###, index: true
+      t.string     :group_name, limit: 40, index: true
 
       # The membership type the member belongs with
       #t.string     :membership_type
