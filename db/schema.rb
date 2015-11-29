@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "updated_at",                null: false
   end
 
-  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
+  #add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
@@ -44,9 +44,9 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "updated_at"
   end
 
-  add_index "group_memberships", ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
-  add_index "group_memberships", ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id", using: :btree
-  add_index "group_memberships", ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
+  #add_index "group_memberships", ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
+  #add_index "group_memberships", ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id", using: :btree
+  #add_index "group_memberships", ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
 
   create_table "groups", force: :cascade do |t|
     t.string "type",        limit: 255
@@ -76,8 +76,8 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "avatar_updated_at"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+  #add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  #add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  #add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
