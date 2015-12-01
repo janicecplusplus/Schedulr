@@ -33,7 +33,7 @@ GroupMembership.create(group_id: 1037, member_id: 112, member_type: "User", grou
 =end
 
 
-num_total_users = 100
+num_total_users = 5000
 confirmed_friendships_per_user = 5         #multiply this by 2 for total friendships
 unconfirmed_friendships_per_user = 5
 events_per_user = 5
