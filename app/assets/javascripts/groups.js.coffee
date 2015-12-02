@@ -23,7 +23,6 @@ ready = ->
     events[i].start = events[i].start_time
     events[i].color = colors[userIndex[events[i].user_id]]
     i++
-  console.log events
   $('#g_calendar').fullCalendar
     events: events,
     editable: false,
