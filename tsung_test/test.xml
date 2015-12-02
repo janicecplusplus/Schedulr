@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE tsung SYSTEM "/home/ec2-user/opt/tsung-1.5.0/share/tsung/tsung-1.0.dtd">
-<tsung loglevel="notice" version="1.0" dumptraffic="true">
+<tsung loglevel="notice" version="1.0">
 <!-- Use this instead for log dumps <tsung loglevel="notice" version="1.0" dumptraffic="true"> -->
 
   <!-- Client side setup -->
@@ -10,14 +10,18 @@
 
   <!-- Server side setup -->
   <servers>
-    <server host="ec2-52-24-199-45.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
+    <server host="ec2-52-25-97-227.us-west-2.compute.amazonaws.com" port="80" type="tcp"></server>
   </servers>
 
 
   <load>
-    <arrivalphase phase="1" duration="1" unit="second">
-      <users arrivalrate="1" unit="second"></users>
-    </arrivalphase>
+    <arrivalphase phase="1" duration="30" unit="second">
+  <users arrivalrate="2" unit="second"></users>
+</arrivalphase>
+    
+<arrivalphase phase="2" duration="30" unit="second">
+  <users arrivalrate="4" unit="second"></users>
+</arrivalphase>
   </load>
 
   <options>
