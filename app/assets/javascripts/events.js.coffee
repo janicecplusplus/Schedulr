@@ -12,7 +12,9 @@ ready = ->
     defaultView: 'agendaWeek',
     height: 450,
     slotMinutes: 30,
-    events: '/events.json',
+    events:
+      url: '/events.json',
+      cache: true,
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
