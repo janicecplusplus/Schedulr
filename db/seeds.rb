@@ -33,7 +33,7 @@ GroupMembership.create(group_id: 1037, member_id: 112, member_type: "User", grou
 =end
 
 
-num_total_users = 5000
+num_total_users = 1000
 confirmed_friendships_per_user = 5         #multiply this by 2 for total friendships
 unconfirmed_friendships_per_user = 5
 events_per_user = 5
@@ -81,8 +81,8 @@ end
 #events creation
 num_total_users.times do |user_num|
 	events_per_user.times do |event_num|
-		title = Faker::Lorem.sentence
-		description = Faker::Lorem.paragraph
+		title = Faker::Lorem.word
+		description = Faker::Lorem.sentence
 		start_time = Faker::Time.between(5.days.ago, Time.now)
 		end_time = start_time + (60 * 30) #30 minute events
 		Event.create(title: title, description: description, user_id: user_num, start_time: start_time, end_time: end_time)
