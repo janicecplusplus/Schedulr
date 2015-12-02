@@ -33,11 +33,11 @@ GroupMembership.create(group_id: 1037, member_id: 112, member_type: "User", grou
 =end
 
 
-num_total_users = 500
-confirmed_friendships_per_user = 8         #multiply this by 2 for total friendships
+num_total_users = 1000
+confirmed_friendships_per_user = 5         #multiply this by 2 for total friendships
 unconfirmed_friendships_per_user = 5
-events_per_user = 10
-users_per_group = 5 #MUST be less than confirmed friendships. Add 1 to this for group creator
+events_per_user = 5
+users_per_group = 3 #MUST be less than confirmed friendships. Add 1 to this for group creator
 #user creation
 for user_num in 1..num_total_users do
 	username = 'user_'+user_num.to_s
