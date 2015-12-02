@@ -84,23 +84,25 @@
       <% end %>
     <% end %>
   <% end %>
+</div>
+<p class="f-header">Pending Requests</p>
+<div class="row">
   <% for friendship in @user.friendships %>
-    <% if friendship.confirmed == 0 %>
-    <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-          <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
-          <p style= "color: gray; font-size: 11px;">Requested</p>
-        </div>
-        <div class="col-md-8 userDisplayDetails">
-          <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
-          <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
-        <% end %>
-        <%= friendship.friend.username %><br><%= friendship.friend.email %>
-      </div>
-      </div>
-        <br>
-    <% end %>
+  <% if friendship.confirmed == 0 %>
+  <div class="col-md-3 userDisplay">
+    <div class="col-md-4 userDisplayPic">
+      <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
+      <p style= "color: gray; font-size: 11px;">Requested</p>
+    </div>
+    <div class="col-md-8 userDisplayDetails">
+      <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
+      <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
+      <% else %>
+      <div class="userDisplayName">No Name</div>
+      <% end %>
+      <%= friendship.friend.username %><br><%= friendship.friend.email %>
+    </div>
+  </div>
+  <% end %>
   <% end %>
 </div>
