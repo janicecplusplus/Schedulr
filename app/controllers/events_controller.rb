@@ -11,6 +11,9 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
+    if (current_user != @event.user)
+      render 'index.html.erb'
+    end
   end
 
   # GET /events/new

@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @users = @group.users
-    @events = Array.new
+    @events = []
     for user in @users
       @events.concat(user.events)
     end
@@ -27,10 +27,10 @@ class GroupsController < ApplicationController
   # POST /groups
   # POST /groups.json
   def create
-    @group = Group.new(title: params[:group][:title], description: params[:group][:description]) 
+    @group = Group.new(title: params[:group][:title], description: params[:group][:description])
     @members = params[:group][:members]
 
-    @group.add(current_user) 
+    @group.add(current_user)
     for member in @members
       if (member != "")
         @group.add(User.where(:username => member).first)
