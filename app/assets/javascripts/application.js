@@ -16,5 +16,7 @@
 //= require turbolinks
 //= require bootstrap.min.js
 //= require bootstrap-sprockets
+//= require moment
 //= require_tree .
+
 //= require fullcalendar
