@@ -12,7 +12,10 @@ class EventsController < ApplicationController
   # GET /events/1
   # GET /events/1.json
   def show
-    fresh_when([@events, current_user.groups, current_user.inverted_friendships])
+	fresh_when([@events, current_user.groups, current_user.inverted_friendships])
+    if (current_user != @event.user)
+      render 'index.html.erb'
+    end
   end
 
   # GET /events/new
