@@ -16,7 +16,6 @@ ready = ->
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
-    editable: true,
     dragOpacity: "0.5",
     slotEventOverlap: false,
     eventColor: "#AFB1E4"

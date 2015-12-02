@@ -25,7 +25,14 @@ ready = ->
     i++
   $('#g_calendar').fullCalendar
     events: events,
-    editable: false,
+    eventClick: (event, jsEvent, view) ->
+      #set the values and open the modal
+      $('#eventInfo').html event.description
+      $('#eventLink').attr 'href', event.url
+      $('#eventContent').dialog
+        modal: true
+        title: event.title
+      return
     header:
       left: 'agendaWeek,agendaDay',
       right: 'prev,today,next',
@@ -37,7 +44,6 @@ ready = ->
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
-    editable: false,
     dragOpacity: "0.5",
     slotEventOverlap: false,
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->
