@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151109015848) do
+ActiveRecord::Schema.define(version: 20151201172429) do
 
   create_table "events", force: :cascade do |t|
     t.string   "title",       limit: 255
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20151109015848) do
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.integer  "private",     limit: 4,     default: 0, null: false
   end
 
   create_table "friendships", force: :cascade do |t|

@@ -1,14 +1,40 @@
 <p id="notice"><%= notice %></p>
 
+
+
 <div class="row">
   <div class="col-md-6">
-<p style="text-align: center; color: #9094da; font-size: 40px; padding-top: 10px;">
-  <%= @group.title %>
-  </p>
-  <p style="text-align: center">
+<div class="groupName" style="text-align: center; color: #9094da; height: 40px; font-family: 'Bitter'">
+  <span><%= @group.title %></span>
+</div>
+<p style="text-align: center">
   <i><%= @group.description %></i>
 </p>
 </div>
+
+<script>
+  ;(function($) {
+    $.fn.textfill = function(options) {
+      var fontSize = options.maxFontPixels;
+      var ourText = $('span:visible:first', this);
+      var maxHeight = $(this).height();
+      var maxWidth = $(this).width();
+      var textHeight;
+      var textWidth;
+      do {
+        ourText.css('font-size', fontSize);
+        textHeight = ourText.height();
+        textWidth = ourText.width();
+        fontSize = fontSize - 1;
+      } while ((textHeight > maxHeight || textWidth > maxWidth) && fontSize > 3);
+      return this;
+    }
+  })(jQuery);
+
+  $(document).ready(function() {
+      $('.groupName').textfill({ maxFontPixels: 100 });
+  });
+</script>
 
 <div class="col-md-6" style="padding-top: 5px;">
 <p style="text-align: center">
@@ -39,3 +65,8 @@
 
 <div id="g_calendar">
 </div>
+
+<script>
+  var events = <%= raw @events.to_json %>
+  var users = <%= raw @group.users.to_json %>
+</script>
