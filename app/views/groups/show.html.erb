@@ -39,3 +39,8 @@
 
 <div id="g_calendar">
 </div>
+
+<script>
+  var events = <%= raw @events.to_json %>
+  var users = <%= raw @group.users.to_json %>
+</script>
