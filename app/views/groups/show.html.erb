@@ -30,10 +30,7 @@
       return this;
     }
   })(jQuery);
-
-  $(document).ready(function() {
-      $('.groupName').textfill({ maxFontPixels: 100 });
-  });
+  $('.groupName').textfill({ maxFontPixels: 100 });
 </script>
 
 <div class="col-md-6" style="padding-top: 5px;">
@@ -66,7 +63,11 @@
 <div id="g_calendar">
 </div>
 
+
+
+
 <script>
   var events = <%= raw @events.to_json %>
   var users = <%= raw @group.users.to_json %>
+  var curUserId = <%= raw current_user.id %>
 </script>

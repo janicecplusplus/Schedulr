@@ -22,14 +22,14 @@
     </div>
     <div class="field">
       <%= f.label :start_time %><br>
-      <%= f.datetime_select :start_time, :minute_step => 15 %>
+      <%= f.datetime_select :start_time, :minute_step => 30 %>
     </div>
     <div class="field">
       <%= f.label :end_time %><br>
-      <%= f.datetime_select :end_time, :minute_step => 15 %>
+      <%= f.datetime_select :end_time, :minute_step => 30 %>
     </div>
       <%= f.label "Make Event Private" %>
-      <%= f.check_box :private, {}, true, false %> <br />
+      <%= f.check_box :private, {checked: @event.private}, true, false %> <br />
     </div>
     <div class="actions">
       <%= f.submit %>

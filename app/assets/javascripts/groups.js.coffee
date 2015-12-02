@@ -22,11 +22,15 @@ ready = ->
     events[i].end = events[i].end_time
     events[i].start = events[i].start_time
     events[i].color = colors[userIndex[events[i].user_id]]
+    if events[i].private and curUserId != events[i].user_id
+      events[i].title = "Private Event"
     i++
   $('#g_calendar').fullCalendar
     events: events,
     eventClick: (event, jsEvent, view) ->
+      console.log "something"
       #set the values and open the modal
+      debugger
       $('#eventInfo').html event.description
       $('#eventLink').attr 'href', event.url
       $('#eventContent').dialog
@@ -40,6 +44,7 @@ ready = ->
     defaultView: 'agendaWeek',
     height: 450,
     slotMinutes: 30,
+    displayEventTime: false,
     # events: window.location.pathname,
     allDayDefault: false,
     firstHour: (new Date).getHours(),
