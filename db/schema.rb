@@ -11,46 +11,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151201172429) do
+ActiveRecord::Schema.define(version: 20151109015848) do
 
   create_table "events", force: :cascade do |t|
-    t.string   "title",       limit: 255
-    t.text     "description", limit: 65535
+    t.string   "title",       limit: 40
+    t.string   "description", limit: 100
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "user_id",     limit: 4
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "private",     limit: 4,     default: 0, null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
+
+  add_index "events", ["user_id"], name: "index_events_on_user_id", using: :btree
 
   create_table "friendships", force: :cascade do |t|
     t.integer  "user_id",    limit: 4
     t.integer  "friend_id",  limit: 4
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
-    t.integer  "confirmed",  limit: 4, default: 0
+    t.integer  "confirmed",  limit: 2, default: 0
   end
 
+  add_index "friendships", ["friend_id"], name: "index_friendships_on_friend_id", using: :btree
+  add_index "friendships", ["user_id"], name: "index_friendships_on_user_id", using: :btree
+
   create_table "group_memberships", force: :cascade do |t|
-    t.integer  "member_id",       limit: 4
-    t.string   "member_type",     limit: 255
-    t.integer  "group_id",        limit: 4
-    t.string   "group_type",      limit: 255
-    t.string   "group_name",      limit: 255
-    t.string   "membership_type", limit: 255
+    t.integer  "member_id",   limit: 4
+    t.string   "member_type", limit: 255
+    t.integer  "group_id",    limit: 4
+    t.string   "group_type",  limit: 255
+    t.string   "group_name",  limit: 40
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "group_memberships", ["group_name"], name: "index_group_memberships_on_group_name", using: :btree
+  add_index "group_memberships", ["group_type", "group_id"], name: "index_group_memberships_on_group_type_and_group_id", using: :btree
+  add_index "group_memberships", ["member_type", "member_id"], name: "index_group_memberships_on_member_type_and_member_id", using: :btree
+
   create_table "groups", force: :cascade do |t|
-    t.string "type",        limit: 255
-    t.string "title",       limit: 255
-    t.text   "description", limit: 65535
+    t.string "type",        limit: 10
+    t.string "title",       limit: 40
+    t.string "description", limit: 100
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
+    t.string   "email",                  limit: 30,  default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
@@ -62,9 +69,9 @@ ActiveRecord::Schema.define(version: 20151201172429) do
     t.string   "last_sign_in_ip",        limit: 255
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
-    t.string   "username",               limit: 255
-    t.string   "firstname",              limit: 255
-    t.string   "lastname",               limit: 255
+    t.string   "username",               limit: 20
+    t.string   "firstname",              limit: 20
+    t.string   "lastname",               limit: 20
     t.string   "avatar_file_name",       limit: 255
     t.string   "avatar_content_type",    limit: 255
     t.integer  "avatar_file_size",       limit: 4
