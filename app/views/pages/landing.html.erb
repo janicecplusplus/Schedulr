@@ -33,15 +33,16 @@
 
                         <hr class="intro-divider">
                         <br>
-
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                              <%= link_to "SIGN UP", new_user_registration_path, :class => "btn btn-lg btn-primary outline"  %>
-                            </li> 
-                            <li>
-                              <%= link_to "LOG IN", new_user_session_path, :class => "btn btn-lg btn-primary outline"  %>
-                            </li>
-                        </ul>
+                        <% cache "signup-login" do %>
+                          <ul class="list-inline intro-social-buttons">
+                              <li>
+                                <%= link_to "SIGN UP", new_user_registration_path, :class => "btn btn-lg btn-primary outline"  %>
+                              </li> 
+                              <li>
+                                <%= link_to "LOG IN", new_user_session_path, :class => "btn btn-lg btn-primary outline"  %>
+                              </li>
+                          </ul>
+                        <% end %>
                     </div>
                 </div>
             </div>

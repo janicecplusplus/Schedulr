@@ -35,9 +35,9 @@
 					<a href= <%= users_path %>> My Friends </a>
 				</li>
 				<% for group in current_user.groups %>
-				<li>
-					<%= link_to "#{group.title}", group %>
-				</li>
+						<li>
+							<%= link_to "#{group.title}", group %>
+						</li>
 				<%end%>
 				<li>
 					<a href= <%= new_group_path %>> Create New Group </a>
