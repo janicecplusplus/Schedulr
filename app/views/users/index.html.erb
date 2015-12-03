@@ -1,88 +1,96 @@
 <% if @user.inverted_friendships.where(confirmed: 0).count != 0 %>
   <p class= "f-header">Friend requests</p>
   <div class="row">
-    <% for friendship in @user.inverted_friendships %>
-      <% if friendship.confirmed == 0 %>
-        <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-            <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
-            <%= link_to "Accept", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
-          </div>
-          <div class="col-md-8 userDisplayDetails">
-          <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
-          <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
+      <% for friendship in @user.inverted_friendships %>
+        <% cache(cache_key_for_friendship_row(friendship)) do %>
+          <% if friendship.confirmed == 0 %>
+              <div class="col-md-3 userDisplay">
+                <div class="col-md-4 userDisplayPic">
+                  <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                  <%= link_to "Accept", {:action => :update, :id => friendship.user_id, :controller => :friendships}, :method => :put, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+                </div>
+                <div class="col-md-8 userDisplayDetails">
+                <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
+                <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
+              <% else %>
+                <div class="userDisplayName">No Name</div>
+              <% end %>
+                <%= friendship.user.username %><br><%= friendship.user.email %>
+            </div>
+            </div>
+          <% end %>
         <% end %>
-          <%= friendship.user.username %><br><%= friendship.user.email %>
-      </div>
-      </div>
       <% end %>
-    <% end %>
 </div>
 <% end %>
 
 <p class= "f-header">Friends</p>
 <div class="row">
   <% for friendship in @user.inverted_friendships %>
-    <% if friendship.confirmed == 1 %>
-        <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-          <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
-                           <%= link_to "Remove", {:action => :destroy, :id => friendship.user_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+    <% cache(cache_key_for_friendship_row(friendship)) do %>
+      <% if friendship.confirmed == 1 %>
+          <div class="col-md-3 userDisplay">
+            <div class="col-md-4 userDisplayPic">
+            <%= image_tag(friendship.user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                             <%= link_to "Remove", {:action => :destroy, :id => friendship.user_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+          </div>
+          <div class="col-md-8 userDisplayDetails">
+            <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
+            <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
+          <% else %>
+            <div class="userDisplayName">No Name</div>
+          <% end %>
+            <%= friendship.user.username %><br><%= friendship.user.email %>
         </div>
-        <div class="col-md-8 userDisplayDetails">
-          <% if friendship.user.firstname != nil and friendship.user.lastname != nil %>
-          <div class="userDisplayName"><%= friendship.user.firstname %> <%=friendship.user.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
-        <% end %>
-          <%= friendship.user.username %><br><%= friendship.user.email %>
-      </div>
-      </div>
-    <% end %>
+        </div>
+      <% end %>
+    <% end %> <!-- cache end -->
   <% end %>
   <% for friendship in @user.friendships %>
-    <% if friendship.confirmed == 1 %>
-        <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-          <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
-                           <%= link_to "Remove", {:action => :destroy, :id => friendship.friend_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+    <% cache(cache_key_for_friendship_row(friendship)) do %>
+      <% if friendship.confirmed == 1 %>
+          <div class="col-md-3 userDisplay">
+              <div class="col-md-4 userDisplayPic">
+              <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                               <%= link_to "Remove", {:action => :destroy, :id => friendship.friend_id, :controller => :friendships}, :method => :delete, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn" %>
+              </div>
+            <div class="col-md-8 userDisplayDetails">
+              <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
+                  <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
+              <% else %>
+              <div class="userDisplayName">No Name</div>
+              <% end %>
+              <%= friendship.friend.username %><br><%= friendship.friend.email %>
+          </div>
         </div>
-        <div class="col-md-8 userDisplayDetails">
-          <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
-          <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
-        <% end %>
-          <%= friendship.friend.username %><br><%= friendship.friend.email %>
-      </div>
-      </div>
-    <% end %>
+      <% end %>
+    <% end %> <!-- cache end-->
   <% end %>
 </div>
 
 <p class="f-header">Other Users</p>
 <div class="row">
   <% for user in @users %>
+  <% cache(cache_key_for_user_row(user)) do %>
     <% if user != current_user %>
       <% if !current_user.friends.include? user and !current_user.inverted_friends.include? user %>
           <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-          <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
-          <%= link_to "Request", friendships_path(:friend_id => user), :method => :post, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn"%>
-        </div>
-        <div class="col-md-8 userDisplayDetails">
-          <% if user.firstname != nil and user.lastname != nil %>
-          <div class="userDisplayName"><%= user.firstname %> <%=user.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
-        <% end %>
-        <%= user.username %><br><%= user.email %>
-      </div>
-      </div>
+                <div class="col-md-4 userDisplayPic">
+                <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+                <%= link_to "Request", friendships_path(:friend_id => user), :method => :post, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn"%>
+                </div>
+            <div class="col-md-8 userDisplayDetails">
+              <% if user.firstname != nil and user.lastname != nil %>
+                  <div class="userDisplayName"><%= user.firstname %> <%=user.lastname %></div>
+            <% else %>
+              <div class="userDisplayName">No Name</div>
+            <% end %>
+            <%= user.username %><br><%= user.email %>
+            </div>
+          </div>
       <% end %>
     <% end %>
+    <% end %> <!-- cache end -->
   <% end %>
   <% for friendship in @user.friendships %>
     <% if friendship.confirmed == 0 %>
