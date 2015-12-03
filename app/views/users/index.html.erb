@@ -93,22 +93,24 @@
     <% end %> <!-- cache end -->
   <% end %>
   <% for friendship in @user.friendships %>
-    <% if friendship.confirmed == 0 %>
-    <div class="col-md-3 userDisplay">
-          <div class="col-md-4 userDisplayPic">
-          <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
-          <p style= "color: gray; font-size: 11px;">Requested</p>
+    <% cache(cache_key_for_friendship_row(friendship)) do %>
+      <% if friendship.confirmed == 0 %>
+        <div class="col-md-3 userDisplay">
+              <div class="col-md-4 userDisplayPic">
+              <%= image_tag(friendship.friend.avatar.url(:crop), class: "img-responsive avatarMed")%>
+              <p style= "color: gray; font-size: 11px;">Requested</p>
+            </div>
+            <div class="col-md-8 userDisplayDetails">
+              <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
+              <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
+            <% else %>
+              <div class="userDisplayName">No Name</div>
+            <% end %>
+            <%= friendship.friend.username %><br><%= friendship.friend.email %>
+          </div>
         </div>
-        <div class="col-md-8 userDisplayDetails">
-          <% if friendship.friend.firstname != nil and friendship.friend.lastname != nil %>
-          <div class="userDisplayName"><%= friendship.friend.firstname %> <%=friendship.friend.lastname %></div>
-        <% else %>
-          <div class="userDisplayName">No Name</div>
-        <% end %>
-        <%= friendship.friend.username %><br><%= friendship.friend.email %>
-      </div>
-      </div>
-        <br>
+          <br>
+      <% end %>
     <% end %>
   <% end %>
 </div>
