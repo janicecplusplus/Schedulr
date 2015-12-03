@@ -62,11 +62,12 @@
   <% end %>
 </div>
 
+
 <p class="f-header">Other Users</p>
 <div class="row">
   <% for user in @users %>
     <% if user != current_user %>
-      <% if !current_user.friends.include? user and !current_user.inverted_friends.include? user %>
+      <% if !@user.friends.include? user and !@user.inverted_friends.include? user %>
           <div class="col-md-3 userDisplay">
           <div class="col-md-4 userDisplayPic">
           <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
