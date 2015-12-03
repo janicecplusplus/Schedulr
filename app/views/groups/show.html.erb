@@ -36,14 +36,14 @@
   });
 </script>
 
-<div class="col-md-6" style="padding-top: 5px;">
-<p style="text-align: center">
+<div class="col-md-6"  style="padding-top: 5px;">
+<p style="text-align: center" id="userList">
   <strong>Users in this group:</strong>
   <% @users.each_with_index do |user, index| %>
-  <%= user.username %>
-  <% if index != @users.size - 1 %>
-  <%=','%>
-  <% end %>
+    <span id="username<%= index %>"><%= user.username %></span>
+    <% if index != @users.size - 1 %>
+      <%=','%>
+    <% end %>
   <%end%>
   <br>
 
@@ -67,6 +67,10 @@
 </div>
 
 <script>
+  var colors = [ '#AFB1E4', '#757CA3', '#DFBAC1', '#B6A5BE', '#D7CCDF', '#32394F' ];
+  $('#userList').find('span').each(function(index){
+    $(this).css('background-color', colors[index]);
+  });
   var events = <%= raw @events.to_json %>
   var users = <%= raw @group.users.to_json %>
 </script>

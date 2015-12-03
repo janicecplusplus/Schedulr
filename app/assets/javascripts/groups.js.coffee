@@ -4,14 +4,6 @@
 
 
 ready = ->
-  colors = [
-    '#AFB1E4'
-    '#757CA3'
-    '#DFBAC1'
-    '#B6A5BE'
-    '#D7CCDF'
-    '#32394F'
-  ]
   userIndex = {}
   i = 0
   while i < users.length
