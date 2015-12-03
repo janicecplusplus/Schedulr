@@ -14,13 +14,14 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-    @friends = User.all
+    @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).distinct
+    # @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).concat(User.find(current_user.id).inverted_friends.joins(:inverted_friendships).where(inverted_friendships: {confirmed: 1}))
     @groupmembers = @group.users
   end
 
   # GET /groups/1/edit
   def edit
-    @friends = User.all
+    @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).distinct.where.not(id: @group.users)
     @groupmembers = @group.users
   end
 
