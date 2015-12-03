@@ -30,10 +30,7 @@
       return this;
     }
   })(jQuery);
-
-  $(document).ready(function() {
-      $('.groupName').textfill({ maxFontPixels: 100 });
-  });
+  $('.groupName').textfill({ maxFontPixels: 100 });
 </script>
 
 <div class="col-md-6"  style="padding-top: 5px;">
@@ -66,6 +63,26 @@
 <div id="g_calendar">
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="eventModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="eventTitle" style="font-weight: 900"></h4>
+      </div>
+      <div class="modal-body">
+        <p id="eventDescription"></p>
+        <p id="eventStartTime"></p>
+        <p id="eventEndTime"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
 <script>
   var colors = [ '#AFB1E4', '#757CA3', '#DFBAC1', '#B6A5BE', '#D7CCDF', '#32394F' ];
   $('#userList').find('span').each(function(index){
@@ -73,4 +90,5 @@
   });
   var events = <%= raw @events.to_json %>
   var users = <%= raw @group.users.to_json %>
+  var curUserId = <%= raw current_user.id %>
 </script>

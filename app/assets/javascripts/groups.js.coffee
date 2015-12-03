@@ -11,13 +11,23 @@ ready = ->
     i++
   i = 0
   while i < events.length
-    events[i].end = events[i].end_time
     events[i].start = events[i].start_time
+    events[i].end = events[i].end_time
     events[i].color = colors[userIndex[events[i].user_id]]
+    if events[i].private and curUserId != events[i].user_id
+      events[i].title = "Private Event"
     i++
   $('#g_calendar').fullCalendar
     events: events,
-    editable: false,
+    eventClick: (event, jsEvent, view) ->
+      #set the values and open the modal
+      if !event.private
+        $('#eventTitle').html event.title
+        $('#eventDescription').html "<b>Description: </b>" + event.description
+        $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
+        $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
+        $('#eventModal').modal()
+      return
     header:
       left: 'agendaWeek,agendaDay',
       right: 'prev,today,next',
@@ -25,11 +35,11 @@ ready = ->
     defaultView: 'agendaWeek',
     height: 450,
     slotMinutes: 30,
+    displayEventTime: false,
     # events: window.location.pathname,
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
-    editable: false,
     dragOpacity: "0.5",
     slotEventOverlap: false,
     eventDrop: (event, dayDelta, minuteDelta, allDay, revertFunc) ->
