@@ -19,7 +19,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'therubyracer', platforms: :ruby
 
 gem 'psych'
-gem 'will_paginate', '~> 3.0.6''
+gem 'will_paginate', '~> 3.0.6'
 gem 'dalli'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
