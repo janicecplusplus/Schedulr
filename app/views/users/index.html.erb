@@ -62,25 +62,8 @@
   <% end %>
 </div>
 
-<p class="f-header">Other Users</p>
+<p class="f-header">Pending Requests</p>
 <div class="row">
-  <% for user in @users %>
-  <div class="col-md-3 userDisplay">
-    <div class="col-md-4 userDisplayPic">
-      <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
-      <%= link_to "Request", friendships_path(:friend_id => user), :method => :post, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn"%>
-    </div>
-    <div class="col-md-8 userDisplayDetails">
-      <% if user.firstname != nil and user.lastname != nil %>
-      <div class="userDisplayName"><%= user.firstname %> <%=user.lastname %></div>
-      <% else %>
-      <div class="userDisplayName">No Name</div>
-      <% end %>
-      <%= user.username %><br><%= user.email %>
-    </div>
-  </div>
-  <% end %>
-
   <% for friendship in @user.friendships %>
   <% if friendship.confirmed == 0 %>
   <div class="col-md-3 userDisplay">
@@ -97,9 +80,27 @@
       <%= friendship.friend.username %><br><%= friendship.friend.email %>
     </div>
   </div>
-  <br>
   <% end %>
   <% end %>
 </div>
 
-<%= will_paginate @posts %>
+<p class="f-header">Other Users</p>
+<div class="row">
+  <% for user in @otherUsers %>
+  <div class="col-md-3 userDisplay">
+    <div class="col-md-4 userDisplayPic">
+      <%= image_tag(user.avatar.url(:crop), class: "img-responsive avatarMed")%>
+      <%= link_to "Request", friendships_path(:friend_id => user), :method => :post, :class=>"btn btn-xs btn-primary btn-block eventBtn confirmBtn"%>
+    </div>
+    <div class="col-md-8 userDisplayDetails">
+      <% if user.firstname != nil and user.lastname != nil %>
+      <div class="userDisplayName"><%= user.firstname %> <%=user.lastname %></div>
+      <% else %>
+      <div class="userDisplayName">No Name</div>
+      <% end %>
+      <%= user.username %><br><%= user.email %>
+    </div>
+  </div>
+  <% end %>
+</div>
+<%= will_paginate @otherUsers %>
