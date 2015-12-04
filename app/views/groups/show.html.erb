@@ -55,7 +55,7 @@
         <%= link_to 'Edit', edit_group_path(@group), :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
     </div>
     <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
-        <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+        <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Warning: This will delete the entire group for other users too. Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
     </div>
         <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
         <%= link_to 'Leave', @group, data: { confirm: 'Sorry, you can never leave; at least not yet..' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
