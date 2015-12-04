@@ -4,15 +4,15 @@
 
 <div class="row">
   <div class="col-md-6">
-<div class="groupName" style="text-align: center; color: #9094da; height: 40px; font-family: 'Bitter'">
-  <span><%= @group.title %></span>
-</div>
-<p style="text-align: center">
-  <i><%= @group.description %></i>
-</p>
-</div>
+    <div class="groupName" style="text-align: center; color: #9094da; height: 40px; font-family: 'Bitter'">
+      <span><%= @group.title %></span>
+    </div>
+    <p style="text-align: center">
+      <i><%= @group.description %></i>
+    </p>
+  </div>
 
-<script>
+  <script>
   ;(function($) {
     $.fn.textfill = function(options) {
       var fontSize = options.maxFontPixels;
@@ -31,39 +31,36 @@
     }
   })(jQuery);
   $('.groupName').textfill({ maxFontPixels: 100 });
-</script>
+  </script>
 
-<div class="col-md-6"  style="padding-top: 5px;">
-<p style="text-align: center" id="userList">
-  <strong>Users in this group:</strong>
-  <% @users.each_with_index do |user, index| %>
-    <span id="username<%= index %>">
+  <div class="col-md-6"  style="padding-top: 5px;">
+    <p style="text-align: center" id="userList">
+      <strong>Users in this group:</strong><br>
+      <% @users.each_with_index do |user, index| %>
+      <span style="border: 1px solid #ccc; display: inline-block; width: 12px; height: 12px;"></span>
       <% if user == current_user %>
-        You
+      You
       <% else %>
-        <%= user.username %>
+      <%= user.username %>
       <% end %>
-    </span>
-    <% if index != @users.size - 1 %>
-      <%=','%>
-    <% end %>
-  <%end%>
-  <br>
 
-  <div class="row" style="text-align:center;">
-    <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
-        <%= link_to 'Edit', edit_group_path(@group), :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
-    </div>
-    <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
-        <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Warning: This will delete the entire group for other users too. Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
-    </div>
+      <%end%>
+      <br>
+
+      <div class="row" style="text-align:center;">
         <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
-        <%= link_to 'Leave', @group, data: { confirm: 'Sorry, you can never leave; at least not yet..' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
-    </div>
+          <%= link_to 'Edit', edit_group_path(@group), :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+        </div>
+        <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+          <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Warning: This will delete the entire group for other users too. Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+        </div>
+        <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
+          <%= link_to 'Leave', @group, data: { confirm: 'Sorry, you can never leave; at least not yet..' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+        </div>
+      </div>
+      <br>
+    </p>
   </div>
-  <br>
-</p>
-</div>
 </div>
 
 <div id="g_calendar">
@@ -90,11 +87,11 @@
 
 
 <script>
-  var colors = [ '#AFB1E4', '#757CA3', '#DFBAC1', '#B6A5BE', '#D7CCDF', '#32394F' ];
-  $('#userList').find('span').each(function(index){
-    $(this).css('background-color', colors[index]);
-  });
-  var events = <%= raw @events.to_json %>
-  var users = <%= raw @group.users.to_json %>
-  var curUserId = <%= raw current_user.id %>
+var colors = [ '#AFB1E4', '#757CA3', '#DFBAC1', '#B6A5BE', '#D7CCDF', '#32394F' ];
+$('#userList').find('span').each(function(index){
+  $(this).css('background-color', colors[index]);
+});
+var events = <%= raw @events.to_json %>
+var users = <%= raw @group.users.to_json %>
+var curUserId = <%= raw current_user.id %>
 </script>
