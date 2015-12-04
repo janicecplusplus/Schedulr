@@ -5,6 +5,9 @@ class GroupsController < ApplicationController
   # GET /groups/1.json
   def show
     @users = @group.users
+    if !@users.include? current_user
+      render :template => "error"
+    end
     @events = []
     for user in @users
       @events.concat(user.events)
