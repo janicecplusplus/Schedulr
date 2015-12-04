@@ -31,7 +31,7 @@
           <% if friendship.confirmed == 0 %>
           <li style="padding: 0 5px;">
             <%= friendship.user.username %>
-            <div style="float: right"><%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %> </div>
+            <div style="display:inline-block;"><%= link_to "Y", {:action => :update, :id => friendship.user_id, :controller => "/friendships"}, :method => :put, :class => "btn btn-default btn-circle", :id => "btn-circle-confirm" %> </div>
           </li>
           <% end %>
           <% end %>
