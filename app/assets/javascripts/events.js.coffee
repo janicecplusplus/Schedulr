@@ -23,6 +23,10 @@ ready = ->
       $('#eventDescription').html "<b>Description: </b>" + event.description
       $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
       $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
+      if event.private
+        $('#eventPrivacy').html "<b>Private: </b>yes"
+      else
+        $('#eventPrivacy').html "<b>Private: </b>no"
       $('#linkToEdit').attr('href','/events/' + event.id + '/edit')
       $('#eventModal').modal()
     titleFormat: 'MMMM yyyy',
