@@ -21,16 +21,14 @@ ready = ->
     i++
   $('#g_calendar').fullCalendar
     events: events,
-    eventMouseOver: (event, jsEvent, view) ->
-      cursor
     eventClick: (event, jsEvent, view) ->
       #set the values and open the modal
-      $('#eventTitle').html event.title
+      $('#groupTitle').html event.title
       if !event.private
-        $('#eventDescription').html "<b>Description: </b>" + event.description
-      $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
-      $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
-      $('#eventModal').modal()
+        $('#groupDescription').html "<b>Description: </b>" + event.description
+      $('#groupStartTime').html "<b>Start Time: </b>" + event.start_time
+      $('#groupEndTime').html "<b>End Time: </b>" + event.end_time
+      $('#groupModal').modal()
       return
     header:
       left: 'agendaWeek,agendaDay',

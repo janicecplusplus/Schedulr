@@ -8,7 +8,7 @@ ready = ->
   while i < events.length
     events[i].start = events[i].start_time
     events[i].end = events[i].end_time
-    events[i].url = 'events/' + events[i].id + '.html'
+    # events[i].url = 'events/' + events[i].id + '.html'
     if events[i].private
       events[i].borderColor = "black"
     i++
@@ -17,6 +17,14 @@ ready = ->
     header:
       left: 'agendaWeek,agendaDay',
       right: 'prev,today,next',
+    eventClick: (event, jsEvent, view) ->
+      #set the values and open the modal
+      $('#eventTitle').html event.title
+      $('#eventDescription').html "<b>Description: </b>" + event.description
+      $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
+      $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
+      $('#linkToEdit').attr('href','/events/' + event.id + '/edit')
+      $('#eventModal').modal()
     titleFormat: 'MMMM yyyy',
     defaultView: 'agendaWeek',
     height: 450,

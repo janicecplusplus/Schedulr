@@ -62,7 +62,6 @@ class GroupsController < ApplicationController
 
   # PATCH/PUT /groups/1
   def leave
-    p "Hello\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
     @group.users.delete(current_user)
     respond_to do |format|
       format.html { redirect_to events_path, notice: 'You have successfully left the group.' }
@@ -73,7 +72,6 @@ class GroupsController < ApplicationController
   # PATCH/PUT /groups/1
   # PATCH/PUT /groups/1.json
   def update
-    p "helloooooooooooooooooo\n\n\n\n\n\n\n\n\n\n\n\n\n"
     respond_to do |format|
       if @group.update(title: params[:group][:title], description: params[:group][:description])
 
