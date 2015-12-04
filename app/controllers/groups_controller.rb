@@ -17,14 +17,22 @@ class GroupsController < ApplicationController
   # GET /groups/new
   def new
     @group = Group.new
-    @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).distinct
-    # @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).concat(User.find(current_user.id).inverted_friends.joins(:inverted_friendships).where(inverted_friendships: {confirmed: 1}))
+    @friendships = Friendship.includes(:user).where(confirmed: 1, friend_id: current_user.id)
+    @inverted_friendships = Friendship.includes(:friend).where(confirmed: 1, user_id: current_user.id)
+    @friends = []
+    @friendships.each{|friendship| @friends.push(friendship.user.username)}
+    @inverted_friendships.each{|friendship| @friends.push(friendship.friend.username)}
     @groupmembers = @group.users
+
   end
 
   # GET /groups/1/edit
   def edit
-    @friends = User.find(current_user.id).friends.joins(:friendships).where(friendships: {confirmed: 1}).distinct.where.not(id: @group.users)
+    @friendships = Friendship.includes(:user).where(confirmed: 1, friend_id: current_user.id)
+    @inverted_friendships = Friendship.includes(:friend).where(confirmed: 1, user_id: current_user.id)
+    @friends = []
+    @friendships.each{|friendship| @friends.push(friendship.user.username)}
+    @inverted_friendships.each{|friendship| @friends.push(friendship.friend.username)}
     @groupmembers = @group.users
   end
 
