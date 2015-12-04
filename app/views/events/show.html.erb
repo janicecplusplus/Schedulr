@@ -20,6 +20,15 @@
   <%= @event.end_time %>
 </p>
 
+<p>
+  <strong>Private: </strong>
+  <% if @event.private == true %>
+  Yes
+  <% else %>
+  No
+  <%end%>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>
 
