@@ -19,7 +19,7 @@
 <br>
     <%= f.label :members, 'Members', class: 'sr-only' %>
     <%= f.select :members, options_for_select(
-    @friends.map {|fr| [fr.username, fr.username]}, 
+    @friends,
     @groupmembers.map {|gm| gm.username}), {}, { :data => { :placeholder => "Friends you'd like to be in this group" },class: 'chosen-select', multiple:true, :style => "min-width: 300px;"}%>
 <br>
 <br>
