@@ -1,23 +1,24 @@
 <%= form_for(@event) do |f| %>
-    <%= f.label :title, 'Title', class: 'sr-only' %>
-    <%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Title" %>
+<%= f.label :title, 'Title', class: 'sr-only' %>
+<%= f.text_field :title, autofocus: true, class: 'form-control', placeholder: "Title" %>
 <br>
-    <%= f.label :description, 'Description', class: 'sr-only'%>
-    <%= f.text_area :description, autofocus: true, class: 'form-control', placeholder: "Description" %>
+<%= f.label :description, 'Description', class: 'sr-only'%>
+<%= f.text_area :description, autofocus: true, class: 'form-control', placeholder: "Description" %>
 <br>
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time, :minute_step => 15 %>
-  </div>
-  <div class="field">
-    <%= f.label :end_time %><br>
-    <%= f.datetime_select :end_time, :minute_step => 15 %>
-  </div>
+<div class="field">
+  <%= f.label :start_time %><br>
+  <%= f.datetime_select :start_time, :minute_step => 15 %>
+</div>
+<div class="field">
+  <%= f.label :end_time %><br>
+  <%= f.datetime_select :end_time, :minute_step => 15 %>
+</div>
+<div class="field">
   <%= f.label "Make Event Private" %>
-  <%= f.check_box :private, {checked: @event.private}, true, false %> <br />
+  <%= f.check_box :private, {checked: @event.private}, "true", "false" %>
 </div>
 
-  <div class="row" style="text-align:center;">
+<div class="row" style="text-align:center;">
   <div class="col-xs-2" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
     <%= f.submit "Update", class: "btn btn-primary btn-block"%>
   </div>
