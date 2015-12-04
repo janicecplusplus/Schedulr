@@ -22,6 +22,7 @@
 </div>
 <% end %>
 
+<% if @user.inverted_friendships.where(confirmed: 1).count != 0 && @user.friendships.where(confirmed: 1).count != 0%>
 <p class= "f-header">Friends</p>
 <div class="row">
   <% for friendship in @user.inverted_friendships %>
@@ -61,7 +62,9 @@
   <% end %>
   <% end %>
 </div>
+<% end %>
 
+<% if @user.friendships.where(confirmed: 0).count != 0 %>
 <p class="f-header">Pending Requests</p>
 <div class="row">
   <% for friendship in @user.friendships %>
@@ -83,6 +86,7 @@
   <% end %>
   <% end %>
 </div>
+<% end %>
 
 <p class="f-header">Other Users</p>
 <div class="row">
