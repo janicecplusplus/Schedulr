@@ -14,19 +14,21 @@ ready = ->
     events[i].start = events[i].start_time
     events[i].end = events[i].end_time
     events[i].color = colors[userIndex[events[i].user_id]]
-    if events[i].private and curUserId != events[i].user_id
+    if events[i].private
       events[i].title = "Private Event"
     i++
   $('#g_calendar').fullCalendar
     events: events,
+    eventMouseOver: (event, jsEvent, view) ->
+      cursor
     eventClick: (event, jsEvent, view) ->
       #set the values and open the modal
+      $('#eventTitle').html event.title
       if !event.private
-        $('#eventTitle').html event.title
         $('#eventDescription').html "<b>Description: </b>" + event.description
-        $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
-        $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
-        $('#eventModal').modal()
+      $('#eventStartTime').html "<b>Start Time: </b>" + event.start_time
+      $('#eventEndTime').html "<b>End Time: </b>" + event.end_time
+      $('#eventModal').modal()
       return
     header:
       left: 'agendaWeek,agendaDay',

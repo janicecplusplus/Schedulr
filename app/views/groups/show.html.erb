@@ -37,7 +37,13 @@
 <p style="text-align: center" id="userList">
   <strong>Users in this group:</strong>
   <% @users.each_with_index do |user, index| %>
-    <span id="username<%= index %>"><%= user.username %></span>
+    <span id="username<%= index %>">
+      <% if user == current_user %>
+        You
+      <% else %>
+        <%= user.username %>
+      <% end %>
+    </span>
     <% if index != @users.size - 1 %>
       <%=','%>
     <% end %>
