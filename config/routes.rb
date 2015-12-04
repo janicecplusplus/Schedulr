@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :events
   resources :friendships
   put '/friendships/:friend_id' => 'friendships#confirm', as: :confirm_friend
+  patch '/groups/:id' => 'groups#leave', as: :leave
   resources :groups
   resources :users, :only => [:index]
   devise_for :users
@@ -11,7 +12,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   root 'pages#landing'
 
-  patch '/groups/:id' => 'groups#leave', as: :leave
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
