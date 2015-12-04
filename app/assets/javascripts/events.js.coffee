@@ -3,6 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 ready = ->
+
+  i = 0
+  while i < events.length
+    events[i].start = events[i].start_time
+    events[i].end = events[i].end_time
+    events[i].url = 'events/' + events[i].id + '.html'
+    if events[i].private
+      events[i].borderColor = "black"
+    i++
   $('#calendar').fullCalendar
     editable: true,
     header:
@@ -12,7 +21,7 @@ ready = ->
     defaultView: 'agendaWeek',
     height: 450,
     slotMinutes: 30,
-    events: '/events.json',
+    events: events,
     allDayDefault: false,
     firstHour: (new Date).getHours(),
     timeFormat: 'h:mm t{ - h:mm t} ',
