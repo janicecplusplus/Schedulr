@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: [:show, :edit, :update, :destroy, :leave]
   before_filter :authenticate_user!
   # GET /groups/1
   # GET /groups/1.json
@@ -58,9 +58,15 @@ class GroupsController < ApplicationController
         format.json { render json: @group.errors, status: :unprocessable_entity }
       end
     end
+  end
 
-
-
+  # PATCH/PUT /groups/1
+  def leave
+    @group.users.delete(current_user)
+    respond_to do |format|
+      format.html { redirect_to events_path, notice: 'You have successfully left the group.' }
+      format.json { head :no_content }
+    end
   end
 
   # PATCH/PUT /groups/1

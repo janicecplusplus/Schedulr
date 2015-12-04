@@ -1,4 +1,5 @@
 <div class="row">
+  <br>
   <div class="col-md-6">
     <div class="groupName" style="text-align: center; color: #9094da; height: 40px; font-family: 'Bitter'">
       <span><%= @group.title %></span>
@@ -51,7 +52,7 @@
           <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Warning: This will delete the entire group for other users too. Are you sure?' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
         </div>
         <div class="col-xs-3" style="display:inline-block; float:none; text-align:left; margin-right:-4px;">
-          <%= link_to 'Leave', @group, data: { confirm: 'Sorry, you can never leave; at least not yet..' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
+          <%= link_to 'Leave', {:id => @group, :controller => :groups, :action => :leave}, :method => :patch, data: { confirm: 'Warning: You are able to leave the group. If you want to rejoin, you have to get someone to add you back...' }, :class=>"btn btn-xs btn-primary btn-block eventBtn" %>
         </div>
       </div>
       <br>
@@ -80,7 +81,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 
 <script>
 var colors = [ '#AFB1E4', '#757CA3', '#DFBAC1', '#B6A5BE', '#D7CCDF', '#32394F' ];
