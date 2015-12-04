@@ -14,6 +14,8 @@ ready = ->
     events[i].start = events[i].start_time
     events[i].end = events[i].end_time
     events[i].color = colors[userIndex[events[i].user_id]]
+    events[i].borderColor = ""
+    delete events[i].url
     if events[i].private
       events[i].title = "Private Event"
     i++
